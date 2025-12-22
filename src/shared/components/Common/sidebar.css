@@ -1,0 +1,60 @@
+/* src/components/Common/sidebar.css */
+
+.app-sidebar {
+  position: fixed;
+  left: 0;
+  width: 260px;
+  background: #fff;
+  border-right: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  z-index: 1200;
+  transition: width .22s ease, transform .3s ease;
+  overflow: auto;
+}
+
+.app-sidebar.collapsed { width: 80px; }
+.app-sidebar.open { transform: translateX(0); } /* mobile state controlled by JS */
+
+.sidebar-inner { padding: 0.5rem 0.5rem 1rem 0.5rem; display:flex; flex-direction:column; height:100%; }
+.collapse-control { padding: .25rem; justify-content:flex-end; cursor:pointer; }
+.collapse-icon.rotated { transform: rotate(180deg); transition: transform .25s ease; }
+
+.sidebar-list { list-style:none; margin:0; padding:0; }
+.sidebar-item { margin: 0.2rem 0; }
+.sidebar-link {
+  display:flex; align-items:center; gap:0.75rem; width:100%;
+  padding: .65rem .8rem; border:none; background:transparent; cursor:pointer; color:#333; text-align:left;
+}
+.sidebar-link:hover { background: rgba(0,0,0,0.03); }
+.sidebar-item.active > .sidebar-link { background:#007bff; color:#fff; font-weight:600; }
+
+.sidebar-label { font-size: .95rem; }
+.accordion-icon { margin-left:auto; display:flex; align-items:center; }
+
+.sidebar-sublist { padding-left: .5rem; margin-top: .25rem; }
+.sidebar-subitem { margin: 0.15rem 0; }
+.sidebar-sublink {
+  display:flex; align-items:center; gap:.6rem; width:100%; padding:.45rem .6rem; border:none; background:transparent; color:#555; cursor:pointer;
+  border-radius:6px;
+}
+.sidebar-sublink:hover { background: rgba(0,0,0,0.03); color:#222; }
+.sidebar-subitem.active > .sidebar-sublink { background:#007bff; color:#fff; font-weight:600; }
+
+.sidebar-badge {
+  margin-left:auto; background:#f0f0f0; padding:.15rem .5rem; border-radius:999px; font-size: .75rem; color:#333; font-weight:600;
+}
+.app-sidebar.collapsed .sidebar-label,
+.app-sidebar.collapsed .sidebar-sublabel,
+.app-sidebar.collapsed .accordion-icon { display:none; }
+
+/* mobile overlay when sidebar is open */
+.sidebar-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1190;
+}
+
+/* small responsive adjustments */
+@media (max-width: 767px) {
+  .app-sidebar { transform: translateX(-110%); width: 80%; max-width: 320px; }
+  .app-sidebar.open { transform: translateX(0); }
+  body.sidebar-open { overflow: hidden; } /* optional to prevent background scroll */
+}
